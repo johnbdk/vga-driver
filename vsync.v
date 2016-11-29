@@ -16,24 +16,26 @@ begin
 		cnt = 3'd0;
 	else
 	begin
-	if(VSYNC_cnt >= 47600 || VSYNC_cnt <= 815599)
-		if(VPIXEL == 7'd96)
-			VPIXEL = 7'd0;
-		else
+		if(VSYNC_cnt >= 47600 || VSYNC_cnt <= 815599)
 		begin
-			if(cnt == 3'd4)
-			begin
-				VPIXEL = VPIXEL + 1'b1;
-				cnt = 3'd0;
-			end
+			if(VPIXEL == 7'd96)
+				VPIXEL = 7'd0;
 			else
-				cnt = cnt + 1'b1;
+			begin
+				if(cnt == 3'd4)
+				begin
+					VPIXEL = VPIXEL + 1'b1;
+					cnt = 3'd0;
+				end
+				else
+					cnt = cnt + 1'b1;
+			end
 		end
-	end
-	if(VSYNC_cnt == 19'd833499)
-		VSYNC_cnt = 19'd0;
-	else
-		VSYNC_cnt = VSYNC_cnt+1;
+		if(VSYNC_cnt == 19'd833499)
+			VSYNC_cnt = 19'd0;
+		else
+			VSYNC_cnt = VSYNC_cnt+1;
+		end
 	end
 end
 
