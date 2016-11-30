@@ -23,7 +23,7 @@ module vram_tb;
 		.DIA_G(DIA_G), 
 		.DIA_B(DIA_B), 
 		.ADDRA(ADDRA), 
-		.CLKA(clk), 
+		.clk(clk), 
 		.ENA(ENA), 
 		.SSRA(SSRA), 
 		.WEA(WEA), 
@@ -44,15 +44,17 @@ module vram_tb;
 		WEA = 0;
 
 		// Wait 100 ns for global reset to finish
-		#1000;
+		#100
+		SSRA= 0;
         ENA = 1;
-        SSRA = 1;
+        //WEA = 1;
+        //SSRA = 1;
         ADDRA = 14'd1;
-        #1000
-        ADDRA = 14'd257;
-        #1000
+        #100
+        ADDRA = 14'd128;
+        #100
         ADDRA = 14'd4097;
-        #1000
+        #100
         ADDRA = 14'd4353;
 	end
 
