@@ -18,27 +18,29 @@ begin
 	end
 	else
 	begin
-		if(HSYNC_cnt >= 288 || HSYNC_cnt <= 1567)
+		if(HSYNC_cnt >= 288 && HSYNC_cnt <= 1567)
 		begin
 			if(HPIXEL == 7'd127)
 				HPIXEL = 7'd0;
 			else
 			begin
-				if(cnt == 3'd5)
+				if(cnt == 3'd4)
+				begin
 					HPIXEL = HPIXEL + 1'b1;
 					cnt = 3'd0;
+				end
 				else
 					cnt = cnt + 1'b1;
 			end
-			if(HSYNC_cnt == 11'd1599)
-				HSYNC_cnt = 11'd0;
-			else
-				HSYNC_cnt = HPIXEL+1;
 		end
+		if(HSYNC_cnt == 11'd1599)
+			HSYNC_cnt = 11'd0;
+		else
+			HSYNC_cnt = HSYNC_cnt+1;
 	end
 end
 
-assign VGA_HSYNC = ((HSYNC_cnt >= 11'd0) || (HSYNC_cnt <= 11'd191)) ? 1'd0 : 1'd1;
+assign VGA_HSYNC = ((HSYNC_cnt >= 11'd0) && (HSYNC_cnt <= 11'd191)) ? 1'd0 : 1'd1;
 /*
 A = 1600 cycles (scanline)
 B = 192 cycles (pulse width)
