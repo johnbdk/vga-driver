@@ -21,7 +21,12 @@ begin
 		if(HSYNC_cnt >= 288 && HSYNC_cnt <= 1567)
 		begin
 			if(HPIXEL == 7'd127)
-				HPIXEL = 7'd0;
+				if(cnt == 3'd4) begin
+					HPIXEL = 7'd0;
+					cnt = 3'd0;
+				end
+				else
+					cnt = cnt + 1;
 			else
 			begin
 				if(cnt == 3'd4)
