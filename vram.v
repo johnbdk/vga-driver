@@ -4,14 +4,13 @@ input       [13:0] ADDRA;
 input 	DIA_R, DIA_G, DIA_B, clk, ENA, SSRA, WEA;
 output 	DOA_R, DOA_G, DOA_B;
 
-/*	
-	128x96
+/*    128x96
 	24	red lines
 	24	blue lines
 	24	green lines
 	24	mixed vetical
 	since block size is 256 bits we need 12 lines of 256 bits (or 64 hex digits)
-	where	32	hex digits represent a line (128bits)
+	where	32	hex digits represent a line (128bits) 
 */
 	
 /* RED COLOR MEMORY */
