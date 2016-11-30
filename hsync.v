@@ -8,12 +8,14 @@ reg [10:0]HSYNC_cnt;
 reg [2:0] cnt;
 //reg [10:0]HPIXEL_next;
 
-always@(posedge clk or posedge resetbutton)
+always@(posedge clk or posedge reset)
 begin
-	if(resetbutton)
+	if(reset)
+	begin
 		HPIXEL = 7'd0;
 		HSYNC_cnt = 11'd0;
 		cnt = 3'd0;
+	end
 	else
 	begin
 		if(HSYNC_cnt >= 288 || HSYNC_cnt <= 1567)
@@ -24,10 +26,10 @@ begin
 			begin
 				if(cnt == 3'd5)
 					HPIXEL = HPIXEL + 1'b1;
+					cnt = 3'd0;
 				else
 					cnt = cnt + 1'b1;
 			end
-
 			if(HSYNC_cnt == 11'd1599)
 				HSYNC_cnt = 11'd0;
 			else
