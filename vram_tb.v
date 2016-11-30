@@ -16,6 +16,7 @@ module vram_tb;
 	wire DOA_R;
 	wire DOA_G;
 	wire DOA_B;
+	wire [2:0] rgb;
 
 	// Instantiate the Unit Under Test (UUT)
 	VRAM uut (
@@ -49,14 +50,41 @@ module vram_tb;
         ENA = 1;
         //WEA = 1;
         //SSRA = 1;
+        /* RED ON */
         ADDRA = 14'd1;
         #100
+		/* RED OFF */
         ADDRA = 14'd128;
         #100
+		/* GREEN ON */
         ADDRA = 14'd4097;
+    	#100
+		/* GREEN OFF */
+        ADDRA = 14'd4224;
         #100
-        ADDRA = 14'd4353;
+		/* BLUE ON */
+        ADDRA = 14'd8192;
+        #100
+		/* BLUE OFF */
+        ADDRA = 14'd8320;
+        #100
+		/* BLUE ON */
+        ADDRA = 14'd9216;
+        #100
+		/* GREEN ON */
+        ADDRA = 14'd9217;
+        #100
+		/* RED ON */
+        ADDRA = 14'd9218;
+        #100
+		/* BLACK ON */
+        ADDRA = 14'd9219;
+        #100
+		/* RED ON */
+        ADDRA = 14'd9470;
 	end
+
+	assign rgb = {DOA_R,DOA_G,DOA_B};
 
 	always #10
 		clk = ~clk;
