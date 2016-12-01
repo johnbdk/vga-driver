@@ -9,13 +9,15 @@ module hsync_tb;
 	// Outputs
 	wire [6:0] HPIXEL;
 	wire VGA_HSYNC;
+	wire RGB;
 
 	// Instantiate the Unit Under Test (UUT)
 	hsync uut (
 		.clk(clk), 
 		.reset(reset), 
 		.HPIXEL(HPIXEL), 
-		.VGA_HSYNC(VGA_HSYNC)
+		.VGA_HSYNC(VGA_HSYNC),
+		.RGB(RGB)
 	);
 
 	initial begin

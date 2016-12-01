@@ -1,7 +1,9 @@
-module hsync(clk, reset, HPIXEL, VGA_HSYNC);
+module hsync(clk, reset, HPIXEL, VGA_HSYNC, RGB);
 input clk, reset;
 output [6:0]HPIXEL;
 output VGA_HSYNC;
+output RGB;
+
 
 reg [6:0]HPIXEL;
 reg [10:0]HSYNC_cnt;
@@ -38,6 +40,7 @@ begin
 					cnt = cnt + 1'b1;
 			end
 		end
+
 		if(HSYNC_cnt == 11'd1599)
 			HSYNC_cnt = 11'd0;
 		else
@@ -45,6 +48,7 @@ begin
 	end
 end
 
+assign RGB = (HSYNC_cnt >= 288 && HSYNC_cnt <= 1567) ? 1'd1 : 1'd0;
 assign VGA_HSYNC = ((HSYNC_cnt >= 11'd0) && (HSYNC_cnt <= 11'd191)) ? 1'd0 : 1'd1;
 /*
 A = 1600 cycles (scanline)
