@@ -1,7 +1,8 @@
-module vsync(clk, reset, VPIXEL, VGA_VSYNC);
+module vsync(clk, reset, VPIXEL, VGA_VSYNC, RGB);
 input clk, reset;
 output [6:0]VPIXEL;
 output VGA_VSYNC;
+output RGB;
 
 reg [6:0]VPIXEL;
 reg [19:0]VSYNC_cnt;
@@ -41,13 +42,14 @@ begin
 		end
 
 
-		if(VSYNC_cnt == 20'd833599)
+		if(VSYNC_cnt == 20'd833499)
 			VSYNC_cnt = 20'd0;
 		else
 			VSYNC_cnt = VSYNC_cnt+1;
 	end
 end
 
+assign RGB = (VSYNC_cnt >= 49600 && VSYNC_cnt <= 817599) ? 1'd1 : 1'd0;
 assign VGA_VSYNC = ((VSYNC_cnt >= 20'd0) && (VSYNC_cnt <= 20'd3199)) ? 1'd0 : 1'd1;
 /*
 O = 833500 cycles (scanline)

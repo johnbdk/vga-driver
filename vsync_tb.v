@@ -9,13 +9,15 @@ module vsync_tb;
 	// Outputs
 	wire [6:0] VPIXEL;
 	wire VGA_VSYNC;
+	wire RGB;
 
 	// Instantiate the Unit Under Test (UUT)
 	vsync uut (
 		.clk(clk), 
 		.reset(reset), 
 		.VPIXEL(VPIXEL), 
-		.VGA_VSYNC(VGA_VSYNC)
+		.VGA_VSYNC(VGA_VSYNC),
+		.RGB(RGB)
 	);
 
 	initial begin
