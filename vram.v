@@ -15,7 +15,7 @@ output 	DOA_R, DOA_G, DOA_B;
 	
 /* RED COLOR MEMORY */
    RAMB16_S1 #(
-      .INIT(1'b0),  // Value of output RAM registers at startup
+      .INIT(1'b1),  // Value of output RAM registers at startup
       .SRVAL(1'b0), // Output value upon SSR assertion
       .WRITE_MODE("NO_CHANGE"), // WRITE_FIRST, NO_CHANGE or READ_FIRST
 
