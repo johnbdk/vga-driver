@@ -53,7 +53,8 @@ begin
 	end
 end
 
-assign RGB = (HSYNC_cnt >= 288 && HSYNC_cnt <= 1567) ? 1'd1 : 1'd0;
+assign RGB = (HSYNC_cnt == 11'd1599);
+//(HSYNC_cnt >= 288 && HSYNC_cnt <= 1567) ? 1'd1 : 1'd0;
 assign VGA_HSYNC = ((HSYNC_cnt >= 11'd0) && (HSYNC_cnt <= 11'd191)) ? 1'd0 : 1'd1;
 
 endmodule
