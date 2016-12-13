@@ -1,8 +1,9 @@
-module VRAM(DIA_R, DIA_G, DIA_B, ADDRA, clk, ENA, SSRA, WEA, DOA_R, DOA_G, DOA_B);
+module vram(clk, DIA_R, DIA_G, DIA_B, ADDRA, ENA, SSRA, WEA, DOA_R, DOA_G, DOA_B);
 
-input       [13:0] ADDRA;
-input 	DIA_R, DIA_G, DIA_B, clk, ENA, SSRA, WEA;
-output 	DOA_R, DOA_G, DOA_B;
+input  [13:0] ADDRA;
+input  clk;
+input  DIA_R, DIA_G, DIA_B, ENA, SSRA, WEA;
+output DOA_R, DOA_G, DOA_B;
 
 /*    128x96
 	24	red lines
@@ -10,12 +11,12 @@ output 	DOA_R, DOA_G, DOA_B;
 	24	green lines
 	24	mixed vetical
 	since block size is 256 bits we need 12 lines of 256 bits (or 64 hex digits)
-	where	32	hex digits represent a line (128bits) 
+	where	32 hex digits represent a line (128bits) 
 */
 	
 /* RED COLOR MEMORY */
    RAMB16_S1 #(
-      .INIT(1'b1),  // Value of output RAM registers at startup
+      .INIT(1'b0),  // Value of output RAM registers at startup
       .SRVAL(1'b0), // Output value upon SSR assertion
       .WRITE_MODE("NO_CHANGE"), // WRITE_FIRST, NO_CHANGE or READ_FIRST
 
@@ -30,7 +31,7 @@ output 	DOA_R, DOA_G, DOA_B;
       .INIT_07(256'h00000000000000000000000000000000ffffffffffffffffffffffffffffffff),
       .INIT_08(256'h00000000000000000000000000000000ffffffffffffffffffffffffffffffff),
       .INIT_09(256'h00000000000000000000000000000000ffffffffffffffffffffffffffffffff),
-      .INIT_0A(256'h00000000000000000000000000000000ffffffffffffffffffffffffffffffff),
+      .INIT_0A(256'h00000000000000000000000000000000ffffffffffffffffffffffffffffffff),  
       .INIT_0B(256'h00000000000000000000000000000000ffffffffffffffffffffffffffffffff),//end of 1/4
       .INIT_0C(256'h0000000000000000000000000000000000000000000000000000000000000000),
       .INIT_0D(256'h0000000000000000000000000000000000000000000000000000000000000000),

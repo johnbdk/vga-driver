@@ -19,7 +19,7 @@ module vram_tb;
 	wire [2:0] rgb;
 
 	// Instantiate the Unit Under Test (UUT)
-	VRAM uut (
+	vram uut (
 		.DIA_R(DIA_R), 
 		.DIA_G(DIA_G), 
 		.DIA_B(DIA_B), 
