@@ -1,14 +1,19 @@
 module hsync(clk, reset, HPIXEL, VGA_HSYNC, RGB);
-input clk, reset;
-output [6:0]HPIXEL;
+/**
+  * A = 1600 cycles (scanline)
+  * B = 192 cycles (pulse width)
+  * C = 96 cycles (back porch)
+  * D = 1280 cycles (display)
+  * E = 32 cycles (front porch)
+  **/
+input  clk, reset;
+output [6:0] HPIXEL;
 output VGA_HSYNC;
 output RGB;
 
-
-reg [6:0]HPIXEL;
-reg [10:0]HSYNC_cnt;
+reg [6:0] HPIXEL;
+reg [10:0] HSYNC_cnt;
 reg [2:0] cnt;
-//reg [10:0]HPIXEL_next;
 
 always@(posedge clk or posedge reset)
 begin
@@ -48,14 +53,8 @@ begin
 	end
 end
 
-assign RGB = (HSYNC_cnt >= 288 && HSYNC_cnt <= 1567) ? 1'd1 : 1'd0;
+assign RGB = (HSYNC_cnt == 11'd1599);
+//(HSYNC_cnt >= 288 && HSYNC_cnt <= 1567) ? 1'd1 : 1'd0;
 assign VGA_HSYNC = ((HSYNC_cnt >= 11'd0) && (HSYNC_cnt <= 11'd191)) ? 1'd0 : 1'd1;
-/*
-A = 1600 cycles (scanline)
-B = 192 cycles (pulse width)
-C = 96 cycles (back porch)
-D = 1280 cycles (display)
-E = 32 cycles (front porch)
-*/
 
 endmodule
